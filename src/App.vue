@@ -2,6 +2,9 @@
   <div class="container">
     <form class="card" @submit.prevent="submitForm">
       <h1>Auth</h1>
+      <pre>
+        {{form}}
+      </pre>
       <div class="form-control" :class="{invalid: !form.email.valid && form.email.touched}">
         <label for="email">Email</label>
         <input type="email" id="email" v-model="form.email.value" @blur="form.email.blur">
@@ -19,7 +22,7 @@
         </div>
       </div>
 
-      <button class="btn primary" type="submit">Submit</button>
+      <button class="btn primary" type="submit" :disabled="!form.valid">Submit</button>
     </form>
   </div>
 </template>
@@ -49,11 +52,13 @@ export default {
     })
 
     const submitForm = () => {
-
+      console.log('email - ', form.email.value)
+      console.log('password - ', form.password.value)
     }
 
     return {
-      form
+      form,
+      submitForm
     }
   }
 }
